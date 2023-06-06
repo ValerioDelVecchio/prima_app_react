@@ -1,0 +1,22 @@
+.expenses {
+    padding: 1rem;
+    background-color: rgb(31, 31, 31);
+    margin: 2rem auto;
+    width: 50rem;
+    max-width: 95%;
+}
+
+/* @media for smartphones */
+@media screen and (max-width: 600px) {
+    .expenses {
+        width: 80%;
+    }
+  }
+
+/* @media for tablets */
+@media screen and (max-width: 992px) {
+    .expenses {
+        width: 90%;
+    }
+  }
+
