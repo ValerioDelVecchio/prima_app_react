@@ -1,19 +1,53 @@
+import React, { useState } from 'react';
 import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
-import './Expenses.css'
-
+import './Expenses.css';
+import ExpensesFilter from './ExpensesFilter';
 
 function Expenses(props) {
-    return (
-        <Card className="expenses">
-            <ExpenseItem date={props.items[0].date} title={props.items[0].title} amount={props.items[0].amount} />
-            <ExpenseItem date={props.items[1].date} title={props.items[1].title} amount={props.items[1].amount} />
-            <ExpenseItem date={props.items[2].date} title={props.items[2].title} amount={props.items[2].amount} />
-            <ExpenseItem date={props.items[3].date} title={props.items[3].title} amount={props.items[3].amount} />
-        </Card>
-    );        
+  const [filteredYear, setFilteredYear] = useState('All');
+
+  const filterChangeHandler = selectedYear => {
+    setFilteredYear(selectedYear);
+  };
+
+
+  // ho creato una constante che filtra gli expenses in base all'anno selezionato e lo mette in un array.
+  // .getFullYear() è un metodo di JS che prende la data e ritorna l'anno
+  // .toString() è un metodo di JS che prende un numero e lo trasforma in stringa perchè il valore di default di selectedYear è una stringa
+  const filteredExpenses = props.items.filter(expense => {
+    if (filteredYear === 'All') {
+      return props.items 
+    } else {
+      return expense.date.getFullYear().toString() === filteredYear;
+    }
+  });
+
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
+        {filteredExpenses.length === 0 && <p className='noExpense'>No expenses found.</p>}
+        {filteredExpenses.map(expense => (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))}
+      </Card>
+    </div>
+  );
 }
 
 export default Expenses;
+
+
+
+
+// abbiamo aggiunto una key a ExpenseItem, che è l'id, che è unico per ogni elemento, cosi da permettere a React di identificare ogni elemento e metterli in ordine correttamente
+
+
 
 
