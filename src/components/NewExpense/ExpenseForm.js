@@ -23,7 +23,7 @@ const ExpenseForm = (props) => {
     event.preventDefault();
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount, // +enteredAmount serve per trasformare il valore di enteredAmount da stringa a numero
       date: new Date(enteredDate),
     };
     props.onSaveExpenseData(expenseData);

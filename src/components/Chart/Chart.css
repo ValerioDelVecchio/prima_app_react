@@ -1,5 +1,6 @@
 .chart {
     padding: 1rem;
+    border: 3px solid green;
     border-radius: 12px;
     background-color: #f8dfff;
     text-align: center;
